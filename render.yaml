@@ -1,0 +1,100 @@
+services:
+  - type: web
+    name: fsd-mern-crud-backend
+    runtime: node
+    plan: free
+    rootDir: FSD-main/mern-crud-app-main/backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: DB_NAME
+        value: mern_crud_app
+
+  - type: web
+    name: fsd-express-middleware-app
+    runtime: node
+    plan: free
+    rootDir: FSD-main/Express_Middleware_App
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+
+  - type: web
+    name: fsd-products-file-persistence
+    runtime: node
+    plan: free
+    rootDir: FSD-main/products-file-persistence-app-main
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+
+  - type: web
+    name: fsd-mongodb-express-app
+    runtime: node
+    plan: free
+    rootDir: FSD-main/mongodb-express-app-main
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: DB_NAME
+        value: library_db
+
+  - type: web
+    name: fsd-mvc-express-app
+    runtime: node
+    plan: free
+    rootDir: FSD-main/mvc-express-app-main
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: MONGO_URI
+        sync: false
+
+  - type: web
+    name: fsd-mvc-auth-app
+    runtime: node
+    plan: free
+    rootDir: FSD-main/mvc-auth-app-main
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: DB_NAME
+        value: todoDB
+      - key: JWT_SECRET
+        generateValue: true
+
+  - type: web
+    name: fsd-movies-mongoose-app
+    runtime: node
+    plan: free
+    rootDir: FSD-main/sudhakars-mongodb-mongoose-movies-app-main
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: MONGO_FULL_URI
+        sync: false
+
+  - type: web
+    name: fsd-template-engine-ejs-app
+    runtime: node
+    plan: free
+    rootDir: FSD-main/template-engine-ejs-app-main
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: DB_NAME
+        value: productsDB

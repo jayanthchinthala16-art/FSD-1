@@ -5,7 +5,7 @@ import morgan from "morgan";
 
 
 const app = express();
-const port=6500;
+const port = process.env.PORT || 6500;
 //1.Apllication-level middleware
 //4.Third party
 app.use(cors());
@@ -36,6 +36,9 @@ const validatePatient=(req,res,next)=>{
     next();
 };
 app.use(logger);
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "Express Middleware App is running" });
+});
 //CRUD
 //POST - Create a new patients URL: http://localhost:6000/api/v1/patients
 //payload {name:sushma,age:30,word:ICU}

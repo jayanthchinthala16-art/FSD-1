@@ -1,0 +1,81 @@
+name: Deploy Frontends to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build all React frontend apps
+        env:
+          VITE_API_URL: ${{ vars.MERN_CRUD_API_URL }}
+        run: |
+          set -euo pipefail
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          mkdir -p _site
+          cp portal/index.html _site/index.html
+          touch _site/.nojekyll
+
+          build_app() {
+            local dir="$1"
+            local slug="$2"
+            echo "=== Building $slug ($dir) ==="
+            pushd "$dir" >/dev/null
+            if [ -f package-lock.json ]; then
+              npm ci
+            else
+              npm install
+            fi
+            npx vite build --base="/${REPO_NAME}/${slug}/"
+            mkdir -p "${OLDPWD}/_site/${slug}"
+            cp -r dist/* "${OLDPWD}/_site/${slug}/"
+            popd >/dev/null
+          }
+
+          build_app "FSD-main/mern-crud-app-main/frontend" "mern-crud-app-main"
+          build_app "FSD-main/react-conditional-rendering-app-main" "react-conditional-rendering-app-main"
+          build_app "FSD-main/react-form-events-app-main" "react-form-events-app-main"
+          build_app "FSD-main/react-frontend-crud-app-main" "react-frontend-crud-app-main"
+          build_app "FSD-main/react-html-render-app-main" "react-html-render-app-main"
+          build_app "FSD-main/react-jsx-render-app-main" "react-jsx-render-app-main"
+          build_app "FSD-main/react-nested-components-app-main" "react-nested-components-app-main"
+          build_app "FSD-main/react-props-state-app-main" "react-props-state-app-main"
+          build_app "FSD-main/react-rendering-lists-app-main" "react-rendering-lists-app-main"
+          build_app "FSD-main/react-router-app-main" "react-router-app-main"
+          build_app "FSD-main/react-state-events-app-main" "react-state-events-app-main"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FSD-1 Apps Portal</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --border: #334155;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --accent: #38bdf8;
+        --accent-hover: #0ea5e9;
+        --green: #34d399;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+        padding: 2rem 1rem 4rem;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      header {
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1.25rem;
+      }
+      h1 {
+        margin: 0 0 0.4rem;
+        font-size: 2rem;
+      }
+      p.subtitle {
+        margin: 0;
+        color: var(--muted);
+      }
+      h2 {
+        margin: 2.25rem 0 1rem;
+        font-size: 1.25rem;
+        color: var(--accent);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.1rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+      .card h3 {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+      .card p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        padding: 0.15rem 0.55rem;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.15);
+        color: var(--accent);
+        width: fit-content;
+      }
+      .badge.backend {
+        background: rgba(52, 211, 153, 0.15);
+        color: var(--green);
+      }
+      a.btn {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        background: var(--accent);
+        color: #0f172a;
+        font-weight: 600;
+        padding: 0.5rem 0.85rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        transition: background 0.15s;
+      }
+      a.btn:hover {
+        background: var(--accent-hover);
+      }
+      .api-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+      }
+      .api-box input {
+        flex: 1;
+        min-width: 240px;
+        padding: 0.55rem 0.75rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: #0f172a;
+        color: var(--text);
+        font-size: 0.9rem;
+      }
+      .api-box button {
+        padding: 0.55rem 1rem;
+        border-radius: 8px;
+        border: none;
+        background: var(--green);
+        color: #0f172a;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      code {
+        background: #0f172a;
+        padding: 0.12rem 0.35rem;
+        border-radius: 4px;
+        font-size: 0.82rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>FSD-1 Full-Stack Lab Portal</h1>
+        <p class="subtitle">
+          Frontend React apps hosted on <strong>GitHub Pages</strong> &middot;
+          Node/Express backends configured for <strong>Render</strong>.
+        </p>
+      </header>
+
+      <div class="api-box">
+        <label for="mern-api"><strong>MERN CRUD Render API URL:</strong></label>
+        <input
+          id="mern-api"
+          type="url"
+          placeholder="https://fsd-mern-crud-backend.onrender.com"
+        />
+        <button id="save-api" type="button">Save &amp; Open MERN App</button>
+      </div>
+
+      <h2>Frontend Apps (GitHub Pages)</h2>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <span class="badge">Full-Stack Frontend</span>
+            <h3>MERN CRUD App</h3>
+            <p>Blog posts CRUD connected to the Render Express + MongoDB API.</p>
+          </div>
+          <a class="btn" href="./mern-crud-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React + Router</span>
+            <h3>React Router App</h3>
+            <p>Multi-page student portal with HashRouter navigation.</p>
+          </div>
+          <a class="btn" href="./react-router-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React CRUD</span>
+            <h3>React Frontend CRUD</h3>
+            <p>Expense tracker with add, edit, delete, and totals.</p>
+          </div>
+          <a class="btn" href="./react-frontend-crud-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React</span>
+            <h3>Conditional Rendering</h3>
+            <p>Conditional UI rendering patterns in React.</p>
+          </div>
+          <a class="btn" href="./react-conditional-rendering-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React</span>
+            <h3>Form Events</h3>
+            <p>Controlled form inputs and event handling.</p>
+          </div>
+          <a class="btn" href="./react-form-events-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React</span>
+            <h3>HTML Render</h3>
+            <p>Basic React HTML rendering example.</p>
+          </div>
+          <a class="btn" href="./react-html-render-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React</span>
+            <h3>JSX Render</h3>
+            <p>JSX expressions and element rendering.</p>
+          </div>
+          <a class="btn" href="./react-jsx-render-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React</span>
+            <h3>Nested Components</h3>
+            <p>Component composition with Header, Student, and Footer.</p>
+          </div>
+          <a class="btn" href="./react-nested-components-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React</span>
+            <h3>Props &amp; State</h3>
+            <p>Passing props and managing local component state.</p>
+          </div>
+          <a class="btn" href="./react-props-state-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React</span>
+            <h3>Rendering Lists</h3>
+            <p>Mapping arrays to keyed React elements.</p>
+          </div>
+          <a class="btn" href="./react-rendering-lists-app-main/">Open App</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="badge">React</span>
+            <h3>State &amp; Events</h3>
+            <p>Interactive state updates via user events.</p>
+          </div>
+          <a class="btn" href="./react-state-events-app-main/">Open App</a>
+        </div>
+      </div>
+
+      <h2>Backend Services (Render Blueprint: <code>render.yaml</code>)</h2>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <span class="badge backend">Express + Mongoose</span>
+            <h3>fsd-mern-crud-backend</h3>
+            <p><code>FSD-main/mern-crud-app-main/backend</code> &middot; <code>/api/v1/posts</code></p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="badge backend">Express Middleware</span>
+            <h3>fsd-express-middleware-app</h3>
+            <p><code>FSD-main/Express_Middleware_App</code> &middot; <code>/api/v1/patients</code></p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="badge backend">Express + JSON</span>
+            <h3>fsd-products-file-persistence</h3>
+            <p><code>FSD-main/products-file-persistence-app-main</code> &middot; <code>/products</code></p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="badge backend">Express + MongoDB Driver</span>
+            <h3>fsd-mongodb-express-app</h3>
+            <p><code>FSD-main/mongodb-express-app-main</code> &middot; <code>/api/v1/books</code></p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="badge backend">Express + Mongoose MVC</span>
+            <h3>fsd-mvc-express-app</h3>
+            <p><code>FSD-main/mvc-express-app-main</code> &middot; <code>/api/v1/movies</code></p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="badge backend">Express + JWT Auth</span>
+            <h3>fsd-mvc-auth-app</h3>
+            <p><code>FSD-main/mvc-auth-app-main</code> &middot; <code>/api/v1/users</code>, <code>/api/v1/todos</code></p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="badge backend">Express + Mongoose</span>
+            <h3>fsd-movies-mongoose-app</h3>
+            <p><code>FSD-main/sudhakars-mongodb-mongoose-movies-app-main</code> &middot; <code>/api/v1/movies</code></p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="badge backend">Express + EJS SSR</span>
+            <h3>fsd-template-engine-ejs-app</h3>
+            <p><code>FSD-main/template-engine-ejs-app-main</code> &middot; Server-rendered UI at <code>/</code></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const input = document.getElementById("mern-api");
+      const saved = localStorage.getItem("mern_crud_api_url");
+      if (saved) input.value = saved;
+
+      document.getElementById("save-api").addEventListener("click", () => {
+        const val = input.value.trim().replace(/\/+$/, "");
+        if (val) {
+          localStorage.setItem("mern_crud_api_url", val);
+          window.location.href = `./mern-crud-app-main/?api=${encodeURIComponent(val)}`;
+        } else {
+          window.location.href = "./mern-crud-app-main/";
+        }
+      });
+    </script>
+  </body>
+</html>

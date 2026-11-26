@@ -2,11 +2,11 @@ import express from "express";
 import { MongoClient, ObjectId } from "mongodb";
 
 const app = express();
-const port = 7000;
+const port = process.env.PORT || 7000;
 
 // MongoDB connection
-const mongoUrl = "mongodb://admin:admin123@localhost:27017";
-const databaseName = "library_db";
+const mongoUrl = process.env.MONGO_URI || "mongodb://admin:admin123@localhost:27017";
+const databaseName = process.env.DB_NAME || "library_db";
 
 const client = new MongoClient(mongoUrl);
 
@@ -23,8 +23,19 @@ await client
   });
 
 // Middleware
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type,Authorization");
+  if (req.method === "OPTIONS") return res.sendStatus(204);
+  next();
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "MongoDB Express Library API is running" });
+});
 
 //CRUD API endpoints
 // Create a new book - POST /api/v1/books
